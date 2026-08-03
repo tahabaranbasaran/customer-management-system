@@ -1,42 +1,6 @@
 <?php
 session_start();
- require_once __DIR__ . "/database.php";
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/login.css">
-    <title>Login Page</title>
-</head>
-<body>
-    <div class="login-container">
-    <h1 class="title">Customer Management System</h1>
-  <form action="" method="post">
-
-  Username: <br>
-  <input type="text" name="username" class="login-input"><br>
-
-  Password: <br>
-  <input type="password" name="password" class="login-input"><br>
-
-  <input type="submit" name="submit" value="submit" class="button login-button">
-
-  </form>    
-  <p class="register-text">
-        Don't have an account?
-        <a href="register.php">Register</a>
-    </p>
-
-</div>
-
-</body>
-</html>
-
-<?php
-
+require_once __DIR__ . "/database.php";
 if(isset($_POST["submit"])){
     $username=$_POST["username"];
     $sorgu=$database->prepare("SELECT * FROM admins WHERE adminUSERNAME=? ");
@@ -67,12 +31,36 @@ if($addAdmin){
 }
 
 }
- 
-    
-
-
-    
-
-
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="login-container">
+    <h1 class="title">Customer Management System</h1>
+  <form action="" method="post">
+
+  Username: <br>
+  <input type="text" name="username" class="login-input"><br>
+
+  Password: <br>
+  <input type="password" name="password" class="login-input"><br>
+
+  <input type="submit" name="submit" value="submit" class="button login-button">
+
+  </form>    
+  <p class="register-text">
+        Hesabın yok mu?
+        <a href="register.php">Register</a>
+    </p>
+
+</div>
+</body>
+</html>
+

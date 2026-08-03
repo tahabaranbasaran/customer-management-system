@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__ . "/../database.php";
-?>
-        
-        
+?>  
+
 <?php
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -17,26 +16,27 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 
 if(empty($_POST["customerNAME"])){
-    echo "Please enter the customer's name!";
+    echo "Lütfen müşterinin ismini giriniz!";
 }
 elseif(empty($_POST["customerSURNAME"])){
-echo "Please enter the customer's surname!";
+echo "Lütfen müşterinin soyismini giriniz!";
 }
 elseif(empty($_POST["companyNAME"])){
-echo "Please enter the company's name!";
+echo "Lütfen müşterinin şirketinin ismini giriniz!";
 }
 elseif(empty($_POST["customerEMAIL"])){
-echo " Please enter the customer's email address!";
+echo " Lütfen müşterinin mail adresini giriniz!";
 }
 elseif(empty($_POST["customerPHONE"])){
-echo "Please enter the customer's phone number!";
+echo "Lütfen müşterinin telefon numarasını giriniz!";
 }
 elseif(empty($_POST["customerCITY"])){
-echo "Please enter the customer's city!";
+echo "Lütfen müşterinin şehrini giriniz!";
 }
 elseif(empty($_POST["customerSTATUS"])){
-echo "Please enter the customer's status!";
+echo "Müşterinin durumunu giriniz: (Aktif/Pasif)!";
 }
+
 else{
 $sorgu=$database->prepare("INSERT INTO customers SET 
                                                   customerNAME=?,
@@ -58,8 +58,8 @@ $customerPHONE,
 $customerCITY,
 $customerSTATUS
 
-]);
-    
+]); 
+
 if($addCustomer){
     
     header("Location: ../dashboard.php");
@@ -67,14 +67,9 @@ if($addCustomer){
     exit();
 }
 else{
-    echo "Customer adding is failed";
-}
-
-
-
-}
-
-
+    echo "Müşteri Eklenemedi";
+    }
+  }
 }
 
 ?>
@@ -85,32 +80,44 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/create.css">
     <title>Add Customer</title>
 </head>
 <body>
 
+<div class="create-container">
+<h1>Müşteri Ekle</h1>
 
     <form action="" method="post">
      
-  Customer Name: <br>
-  <input type="text" name="customerNAME"><br>
-  Customer Surname: <br>
-  <input type="text" name="customerSURNAME"><br>
-  Company Name: <br>
-  <input type="text" name="companyNAME"><br>
-   E-Mail: <br>
-  <input type="email" name="customerEMAIL"><br>
-   Phone Number: <br>
-  <input type="text" name="customerPHONE"><br>
-   City: <br>
-  <input type="text" name="customerCITY"><br>
-   Status: <br>
-  <input type="text" name="customerSTATUS"><br>
-  <input type="submit" value="submit">
+  <label>Müşteri Adı: <br></label><br>
+  <input type="text" name="customerNAME" required><br>
+
+  <label>Müşteri Soyadı:</label> <br>
+  <input type="text" name="customerSURNAME" required><br>
+
+  <label>Şirket İsmi: </label><br>
+  <input type="text" name="companyNAME" required><br>
+
+   <label>E-Mail:</label> <br>
+  <input type="email" name="customerEMAIL" required><br>
+
+   <label>Telefon:</label> <br>
+  <input type="text" name="customerPHONE" required><br>
+
+  <label> Şehir: </label><br>
+  <input type="text" name="customerCITY" required><br>
+
+   <label>Durum: (Aktif-Pasif)</label> <br>
+  <input type="text" name="customerSTATUS" required><br>
+
+  <input type="submit" value="submit" class="submit-button"><br>
  
-
-
     </form>
+    <a href="../dashboard.php">
+    <button class="back-button">Dashboard'a Dön</button>
+</a>
+</div>
 </body>
 </html>
 

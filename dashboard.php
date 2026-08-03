@@ -8,8 +8,6 @@ if (!isset($_SESSION["adminUSERNAME"])) {
  require_once __DIR__ . "/database.php";
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,22 +19,20 @@ if (!isset($_SESSION["adminUSERNAME"])) {
 <body>
     
    <h2 class="welcome">Hoşgeldin
-    <span></span>
+    <span>
      <?php 
       $username=$_SESSION["adminUSERNAME"];
       echo $username?> !
       </span>
     </h2>
 
-
-
-
-
-
 <form action="" method="get" class="search-form">
 
-<input type="text" name="search" placeholder="Search Customer" class="search-input">
+<input type="text" name="search" placeholder="Müşteri Ara" class="search-input">
 <input type="submit" value="Search" class="search-button">
+<a href="dashboard.php" class="clear-button">
+    Tüm Müşterileri Göster
+</a>
 </form>
 <?php
 
@@ -73,27 +69,21 @@ $sorgu->execute([
 
 $customers = $sorgu->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 ?>
-
-
-
-
 
 
 <table border="2px">
 <thead>
 <tr>
-<th style="background-color: #5B8DEF; padding:1rem ">Customer Name</th>
-<th style="background-color: #5B8DEF; padding:1rem ">Customer Surname</th>
-<th style="background-color: #5B8DEF; padding:1rem ">Company Name</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Müşteri İsmi</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Soyismi</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Şirket Adı</th>
 <th style="background-color: #5B8DEF; padding:1rem ">E-Mail</th>
-<th style="background-color: #5B8DEF; padding:1rem ">Phone</th>
-<th style="background-color: #5B8DEF; padding:1rem ">City</th>
-<th style="background-color: #5B8DEF; padding:1rem ">Status</th>
-<th style="background-color: green; padding:1rem ">Update Customer</th>
-<th style="background-color: red; padding:1rem ">Delete Customer</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Telefon</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Şehir</th>
+<th style="background-color: #5B8DEF; padding:1rem ">Durum</th>
+<th style="background-color: green; padding:1rem ">Güncelle</th>
+<th style="background-color: red; padding:1rem ">Sil</th>
 </tr>
 </thead>
 <tbody>
@@ -113,22 +103,21 @@ foreach($customers as $customer){
 
 <td>
     <a href="customers/update.php?customerID=<?= $customer["customerID"] ?>">
-        <button type="button" class="button update-button">Update Customer</button>
+        <button type="button" class="button update-button">Müşteriyi Güncelle</button>
     </a>
 
 </td>
 <td>
-    <a href="customers/delete.php?customerID=<?= $customer["customerID"] ?>"class="button delete-button">Delete Customer</a>
+    <a href="customers/delete.php?customerID=<?= $customer["customerID"] ?>"class="button delete-button" 
+    onclick="return confirm('Bu müşteriyi silmek istediğinize emin misiniz?');">
+    Müşteriyi Sil</a>
 </td>
 </tr>
-
 
 <?php
 }
 ?>
 </tbody>
-
-
 </table>
 
  <form action="" method="post">
@@ -142,8 +131,8 @@ foreach($customers as $customer){
         
         ?>
 
-    <button class="button logout-button" name="logout" value="logout">Log Out</button>
-    <button class="button add-button" name="veriekle" value="veriekle">Add Customer</button>
+    <button class="button logout-button" name="logout" value="logout">Çıkış Yap</button>
+    <button class="button add-button" name="veriekle" value="veriekle">Müşteri Ekle</button>
 
 <?php
 if(isset($_POST["veriekle"])){
@@ -151,10 +140,7 @@ header("Location: customers/create.php");
 exit();
 }
 
-
 ?>
-
 </form>
-
 </body>
 </html>

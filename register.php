@@ -8,16 +8,14 @@ $username=$_POST["username"];
 $password=$_POST["password"];
 $passwordRepeat=$_POST["passwordRepeat"];
 
-
-
 if($password != $passwordRepeat){
-    echo "Passwords do not match!";
+    echo "Şifreler eşleşmiyor";
 }else{
 $sorgu=$database->prepare("SELECT * FROM admins WHERE adminUSERNAME=?");
 $sorgu->execute([$username]);
 $admin=$sorgu->fetch(PDO::FETCH_ASSOC);
 if($admin){
-    echo "This username already taken!";
+    echo "Bu kullanıcı adı alınmış!";
 }
 else{
     $hash=password_hash($password, PASSWORD_DEFAULT);
@@ -51,18 +49,18 @@ else{
 
 <div class="login-container">
 
-<h1 class="title">Create Admin Account</h1>
+<h1 class="title">Admin Hesabı Oluştur</h1>
     <form action="" method="post">
 
-    Username: <br>
+    Kullanıcı Adı: <br>
     <input type="text" name="username" class="login-input"
     placeholder="Enter username"><br>
 
-    Password: <br>
+    Şifre: <br>
     <input type="password" name="password" class="login-input"
     placeholder="Enter password"><br>
 
-    Confirm Password:<br>
+    Şifre Tekrar:<br>
     <input type="password" name="passwordRepeat" class="login-input"
     placeholder="Confirm password"><br>
      
@@ -70,8 +68,8 @@ else{
 
     </form>
     <p class="register-text">
-    Already have an account?
-    <a href="login.php">Login</a>
+    Zaten bir hesabın var mı?
+    <a href="login.php">Giriş Yap</a>
     </p>
     </div>
 </p>

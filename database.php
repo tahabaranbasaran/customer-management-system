@@ -7,7 +7,4 @@ $database=new PDO("mysql:host=localhost; dbname=customers_database", "root", "")
     echo $e->getMessage();
 }
 
-
-
-
 ?>
